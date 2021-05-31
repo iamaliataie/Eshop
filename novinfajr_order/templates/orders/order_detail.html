@@ -1,0 +1,91 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="cart-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    {% if orderdetail is None %}
+                    <p class="alert alert-warning">هیچ کالایی یافت نشد</p>
+                    {% else %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>محصول</th>
+                                <th>قیمت</th>
+                                <th>تعداد</th>
+                                <th>کل</th>
+                                <th>حذف</th>
+                            </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                            {% for order in orderdetail %}
+                            <tr>
+                                <td>
+                                    <div class="img">
+                                        <a href="{{ order.product.get_absolute_url }}"><img src="{{ order.product.image.url }}" alt="Image"></a>
+                                        <p>{{ order.product.title }}</p>
+                                    </div>
+                                </td>
+                                <td>{{ order.price }}</td>
+                                <td>
+                                    <div class="qty">
+
+                                        <input type="text" value="{{ order.count }}">
+
+                                    </div>
+                                </td>
+                                <td>{{ order.get_total }}</td>
+                                <td>
+                                    <a class="btn" href="/remove-order/{{ order.id }}"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <!--<div class="col-md-12">
+                            <div class="coupon">
+                                <input type="text" placeholder="Coupon Code">
+                                <button>Apply Code</button>
+                            </div>
+                        </div>-->
+                        <div class="col-md-12">
+                            <div class="cart-summary">
+                                <div class="cart-content">
+                                    {% if orderdetail is None %}
+                                    <h1>خرید</h1>
+                                    <p> مجموع خرید: 0</p>
+                                    <p>هزینه حمل و نقل: 0 افغانی</p>
+                                    <h2>مجموع: 0</h2>
+                                    {% else %}
+                                    <h1>خرید</h1>
+                                    <p> مجموع خرید: {{ order.get_order_total }}</p>
+                                    <p>هزینه حمل و نقل: 0 افغانی</p>
+                                    <h2>مجموع: {{ order.get_order_total }}</h2>
+                                    {% endif %}
+                                </div>
+                                <div class="cart-btn">
+<!--
+                                    <button>Update Cart</button>
+-->
+                                    <button>پرداخت</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

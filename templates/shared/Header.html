@@ -1,0 +1,106 @@
+{% load active_link_tags %}
+{% load static %}
+{% url 'home' as home %}
+{% url 'products' as products %}
+{% url 'login' as login %}
+{% url 'signup' as signup %}
+
+<!-- Top bar Start -->
+<div class="top-bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <i class="fa fa-envelope"></i>
+                info@terabyte.af
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-phone-alt"></i>
+                <span dir="ltr">+۹۳ ۷۶ ۷۰ ۱۴ ۷۶۹</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Top bar End -->
+
+<!-- Nav Bar Start -->
+<div class="nav">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a href="#" class="navbar-brand">منو</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between " id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == home %}active{% endif %}">خانه</a>
+                    <a href="{% url 'products' %}" class="nav-item nav-link {% if request.path == products %}active{% endif %}">محصولات</a>
+                    <!-- <a href="product-detail.html" class="nav-item nav-link">Product Detail</a> -->
+                    <!-- <a href="cart.html" class="nav-item nav-link">Cart</a> -->
+                    <!-- <a href="checkout.html" class="nav-item nav-link">Checkout</a> -->
+<!--                    <a href="my-account.html" class="nav-item nav-link ">حساب من</a>-->
+                    <!-- <div class="nav-item dropdown"> -->
+                    <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a> -->
+                    <!-- <div class="dropdown-menu"></div> -->
+<!--                    <a href="wishlist.html" class="nav-item nav-link">محصولات دلخواه</a>-->
+                    <!-- <a href="login.html" class="nav-item nav-link">Login & Register</a> -->
+<!--                    <a href="contact.html" class="nav-item nav-link">تماس با ما</a>-->
+                    <!-- </div> -->
+                    <!-- </div> -->
+                </div>
+                <div class="navbar-nav">
+                    <div class="nav-item dropdown">
+                        {% if request.user.is_authenticated %}
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ request.user.get_full_name }}</a>
+                        <div class="dropdown-menu dropdown-menu-farsi">
+                            <a href="#" class="dropdown-item">پنل کاربری</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item">خروج</a>
+                        </div>
+                        {% else %}
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ناحیه کاربری</a>
+                        <div class="dropdown-menu dropdown-menu-farsi">
+                            <a href="{% url 'login' %}" class="dropdown-item">ورود</a>
+                            <a href="{% url 'signup' %}" class="dropdown-item">ثبت نام</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Nav Bar End -->
+
+<!-- Bottom Bar Start -->
+<div class="bottom-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <div class="logo">
+                    <a href="{{ home }}">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="search">
+                    <input type="text" placeholder="Search">
+                    <button><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="user">
+                    <a href="wishlist.html" class="btn wishlist">
+                        <i class="fa fa-heart"></i>
+                        <span>(0)</span>
+                    </a>
+                    <a href="{% url 'cart' %}" class="btn cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>{{ ordercount }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bottom Bar End -->
