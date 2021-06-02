@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from novinfajr import settings
 from .views import home_page, header, log_out
@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('novinfajr_products.urls')),
     path('', include('novinfajr_order.urls')),
     path('', include('novinfajr_account.urls')),
+    re_path('ckeditor/', include('ckeditor_uploader.urls')),
     path('header', header, name='header'),
     path('logout', log_out, name='logout'),
     path('admin/', admin.site.urls),

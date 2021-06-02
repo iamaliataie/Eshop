@@ -1,5 +1,7 @@
 from django.db import models
 import os
+# from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.
@@ -34,7 +36,8 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name='نام کالا')
-    description = models.TextField(verbose_name='توضیحات')
+    description = RichTextUploadingField(null=True)
+    # description = models.TextField(verbose_name='توضیحات')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='قیمت')
     image = models.ImageField(upload_to=upload_path, verbose_name='تصویر')
     category = models.ForeignKey(ProductCategory, null=True, on_delete=models.CASCADE)

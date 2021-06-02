@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_render_partial',
     'active_link',
+    'ckeditor',
+    'ckeditor_uploader',
 
     'novinfajr_products',
     'novinfajr_client_comment',
@@ -136,3 +138,18 @@ MEDIA_ROOT = BASE_DIR / 'static_cdn/media_root'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+CKEDITOR_RESTRICT_BY_USER = True #Only who upload image see it
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_BROWSE_SHOW_DIRS = True # Shows directory of image in the server
+CKEDITOR_RESTRICT_BY_DATE = True # Arranges image in terms of date uploaded
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+        'extraPlugins': 'codesnippet',
+    },
+}
