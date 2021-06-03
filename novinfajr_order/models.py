@@ -6,7 +6,7 @@ from novinfajr_products.models import Product
 
 class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE ,verbose_name='سفارش دهنده')
-    payment_date = models.DateTimeField(null=True, blank=True, verbose_name='تاریخ پرداخت')
+    payment_date = models.DateTimeField(auto_now=True, blank=True, verbose_name='تاریخ پرداخت')
     is_paid = models.BooleanField(default=False, verbose_name='پرداخت شده/پرداخت نشده')
 
     def __str__(self):

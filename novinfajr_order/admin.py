@@ -5,7 +5,7 @@ from novinfajr_order.models import Order, OrderDetail
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'id', 'get_order_total']
+    list_display = ['__str__', 'id', 'get_order_total', 'is_paid', 'payment_date']
 
 
 class OrderDetailAdmin(admin.ModelAdmin):

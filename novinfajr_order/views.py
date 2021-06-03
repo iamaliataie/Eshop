@@ -57,3 +57,12 @@ def remove_order(request, *args, **kwargs):
     print(order_detail)
     order_detail.delete()
     return redirect('/open-order')
+
+
+@login_required(login_url='/login')
+def check_out(request, *args, **kwargs):
+    order_id = kwargs['orderId']
+    open_order = Order.objects.get(id=order_id)
+    open_order.is_paid = True
+    open_order.save()
+    return redirect('/open-order')

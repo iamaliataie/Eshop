@@ -78,7 +78,12 @@
 <!--
                                     <button>Update Cart</button>
 -->
-                                    <button>پرداخت</button>
+                                    <form method="post" action="/checkout/{{ order.id }}">
+                                        {% csrf_token %}
+
+                                        <button {% if orderdetail is None %}disabled{% endif %} >پرداخت</button>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
